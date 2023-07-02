@@ -1,5 +1,5 @@
 function filterUsers(currentUsers, searchText) {
-  const search = searchText.trim();
+  const search = searchText.toLowerCase().trim();
 
   const filteredUsers = currentUsers.filter(
     (user) =>
