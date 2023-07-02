@@ -9,6 +9,7 @@ const AdminPageContext = createContext();
 
 function AdminPageProvider({ children }) {
   // states
+  const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [displayUsers, setDisplayUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -33,10 +34,12 @@ function AdminPageProvider({ children }) {
   useEffect(() => {
     getApiResponse(USERS_API)
       .then((users) => {
+        setIsLoading(false);
         setUsers(users.data);
         setFilteredUsers(users.data);
       })
       .catch((error) => {
+        setIsLoading(false);
         setErrorMessage(error);
       });
   }, []);
@@ -104,6 +107,7 @@ function AdminPageProvider({ children }) {
   return (
     <AdminPageContext.Provider
       value={{
+        isLoading,
         users,
         setUsers,
         displayUsers,
