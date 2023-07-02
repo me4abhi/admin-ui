@@ -10,7 +10,6 @@ function DeleteSelectedButton() {
       );
       setUsers(users_remaining);
     } else {
-      console.log("No row selected");
       setErrorMessage("No row is selected");
     }
   };
@@ -18,7 +17,7 @@ function DeleteSelectedButton() {
   return (
     <button
       type="button"
-      className="btn btn-danger float-start"
+      className="btn btn-danger"
       onClick={deleteSelectedRows}
     >
       Delete Selected

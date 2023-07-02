@@ -37,7 +37,6 @@ function AdminPageProvider({ children }) {
         setFilteredUsers(users.data);
       })
       .catch((error) => {
-        console.log(error);
         setErrorMessage(error);
       });
   }, []);
@@ -96,11 +95,9 @@ function AdminPageProvider({ children }) {
   // handle click outside edit-user input elements
   const handleClickOutsideUserInputs = (e) => {
     if (editUserRefs.current.every((ref) => ref && !ref.contains(e.target))) {
-      console.log("clicked outside the inputs");
       setIsEditableId("");
       setErrorMessage("");
     } else {
-      console.log("clicked inside the inputs");
     }
   };
 

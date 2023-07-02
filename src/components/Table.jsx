@@ -8,15 +8,17 @@ function Table() {
   const { displayUsers, searchText, handleSelectAllRows } = useAdminContext();
 
   return displayUsers.length > 0 ? (
-    <table className="table">
-      <TableHead handleSelectAllRows={handleSelectAllRows} />
+    <div className="table-responsive">
+      <table className="table table-responsive-lg">
+        <TableHead handleSelectAllRows={handleSelectAllRows} />
 
-      <tbody>
-        {displayUsers.map((user, index) => (
-          <TableRow key={user.id} currentUser={user} index={index} />
-        ))}
-      </tbody>
-    </table>
+        <tbody>
+          {displayUsers.map((user, index) => (
+            <TableRow key={user.id} currentUser={user} index={index} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   ) : searchText.length > 0 || displayUsers.length === 0 ? (
     <div className="h-50 my-5">
       <FontAwesomeIcon
