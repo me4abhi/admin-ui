@@ -1,6 +1,5 @@
 import { NavButton } from "./sub/NavButton";
 import { useAdminContext } from "../hooks/useAdminContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAnglesLeft,
   faAnglesRight,
