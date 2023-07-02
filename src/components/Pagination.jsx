@@ -1,3 +1,4 @@
+import { NavButton } from "./sub/NavButton";
 import { useAdminContext } from "../hooks/useAdminContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,7 +15,6 @@ function Pagination() {
 
   // pagination calculations
   const pageNumberArray = getPagesArray(filteredUsers, USERS_PER_PAGE);
-
   const lastPage = pageNumberArray[pageNumberArray.length - 1];
 
   return (
@@ -22,36 +22,21 @@ function Pagination() {
       <ul className="pagination">
         {currentPage === 1 ? (
           <>
-            <li className="page-item disabled">
-              <button className="page-link" aria-label="first page">
-                <span aria-hidden="true">
-                  <FontAwesomeIcon icon={faAnglesLeft} />
-                </span>
-              </button>
-            </li>
-            <li className="page-item disabled">
-              <button className="page-link" aria-label="previous page">
-                <FontAwesomeIcon icon={faChevronLeft} />
-              </button>
-            </li>
+            <NavButton _icon={faAnglesLeft} disabled={true} />
+            <NavButton _icon={faChevronLeft} disabled={true} />
           </>
         ) : (
           <>
-            <li className="page-item" onClick={() => setCurrentPage(1)}>
-              <button className="page-link" aria-label="last page">
-                <span aria-hidden="true">
-                  <FontAwesomeIcon icon={faAnglesLeft} />
-                </span>
-              </button>
-            </li>
-            <li
-              className="page-item"
-              onClick={() => setCurrentPage((prev) => prev - 1)}
-            >
-              <button className="page-link" href="" aria-label="next page">
-                <FontAwesomeIcon icon={faChevronLeft} />
-              </button>
-            </li>
+            <NavButton
+              _icon={faAnglesLeft}
+              disabled={false}
+              clickTrigger={() => setCurrentPage(1)}
+            />
+            <NavButton
+              _icon={faChevronLeft}
+              disabled={false}
+              clickTrigger={() => setCurrentPage((prev) => prev - 1)}
+            />
           </>
         )}
 
@@ -69,36 +54,21 @@ function Pagination() {
 
         {currentPage === lastPage ? (
           <>
-            <li className="page-item disabled">
-              <button className="page-link" aria-label="next page">
-                <FontAwesomeIcon icon={faChevronRight} />
-              </button>
-            </li>
-            <li className="page-item disabled">
-              <button className="page-link" aria-label="last page">
-                <span aria-hidden="true">
-                  <FontAwesomeIcon icon={faAnglesRight} />
-                </span>
-              </button>
-            </li>
+            <NavButton _icon={faChevronRight} disabled={true} />
+            <NavButton _icon={faAnglesRight} disabled={true} />
           </>
         ) : (
           <>
-            <li
-              className="page-item"
-              onClick={() => setCurrentPage((prev) => prev + 1)}
-            >
-              <button className="page-link" aria-label="next page">
-                <FontAwesomeIcon icon={faChevronRight} />
-              </button>
-            </li>
-            <li className="page-item" onClick={() => setCurrentPage(lastPage)}>
-              <button className="page-link" aria-label="last page">
-                <span aria-hidden="true">
-                  <FontAwesomeIcon icon={faAnglesRight} />
-                </span>
-              </button>
-            </li>
+            <NavButton
+              _icon={faChevronRight}
+              disabled={false}
+              clickTrigger={() => setCurrentPage((prev) => prev + 1)}
+            />
+            <NavButton
+              _icon={faAnglesRight}
+              disabled={false}
+              clickTrigger={() => setCurrentPage(lastPage)}
+            />
           </>
         )}
       </ul>
