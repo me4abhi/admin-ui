@@ -1,7 +1,7 @@
-function paginateUsers(users, currentPage, usersPerPage) {
+function paginateUsers(filteredUsers, currentPage, usersPerPage) {
   const startIndex = currentPage * usersPerPage - usersPerPage;
 
-  return users.slice(startIndex, startIndex + usersPerPage);
+  return filteredUsers.slice(startIndex, startIndex + usersPerPage);
 }
 
 export default paginateUsers;

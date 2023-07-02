@@ -1,3 +1,4 @@
+import { useAdminContext } from "../hooks/useAdminContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAnglesLeft,
@@ -5,12 +6,14 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { PaginationContext } from "../context/PaginationContext";
+import { USERS_PER_PAGE } from "../data/users_per_page";
+import getPagesArray from "../utils/getPagesArray";
 
 function Pagination() {
-  const { pageNumberArray, currentPage, setCurrentPage } =
-    useContext(PaginationContext);
+  const { currentPage, filteredUsers, setCurrentPage } = useAdminContext();
+
+  // pagination calculations
+  const pageNumberArray = getPagesArray(filteredUsers, USERS_PER_PAGE);
 
   const lastPage = pageNumberArray[pageNumberArray.length - 1];
 
@@ -20,34 +23,34 @@ function Pagination() {
         {currentPage === 1 ? (
           <>
             <li className="page-item disabled">
-              <a className="page-link" href="#" aria-label="first page">
+              <button className="page-link" aria-label="first page">
                 <span aria-hidden="true">
                   <FontAwesomeIcon icon={faAnglesLeft} />
                 </span>
-              </a>
+              </button>
             </li>
             <li className="page-item disabled">
-              <a className="page-link" href="#" aria-label="previous page">
+              <button className="page-link" aria-label="previous page">
                 <FontAwesomeIcon icon={faChevronLeft} />
-              </a>
+              </button>
             </li>
           </>
         ) : (
           <>
             <li className="page-item" onClick={() => setCurrentPage(1)}>
-              <a className="page-link" href="#" aria-label="last page">
+              <button className="page-link" aria-label="last page">
                 <span aria-hidden="true">
                   <FontAwesomeIcon icon={faAnglesLeft} />
                 </span>
-              </a>
+              </button>
             </li>
             <li
               className="page-item"
               onClick={() => setCurrentPage((prev) => prev - 1)}
             >
-              <a className="page-link" href="#" aria-label="next page">
+              <button className="page-link" href="" aria-label="next page">
                 <FontAwesomeIcon icon={faChevronLeft} />
-              </a>
+              </button>
             </li>
           </>
         )}
@@ -60,25 +63,23 @@ function Pagination() {
             }
             onClick={() => setCurrentPage(number)}
           >
-            <a className="page-link" href="#">
-              {number}
-            </a>
+            <button className="page-link">{number}</button>
           </li>
         ))}
 
         {currentPage === lastPage ? (
           <>
             <li className="page-item disabled">
-              <a className="page-link" href="#" aria-label="next page">
+              <button className="page-link" aria-label="next page">
                 <FontAwesomeIcon icon={faChevronRight} />
-              </a>
+              </button>
             </li>
             <li className="page-item disabled">
-              <a className="page-link" href="#" aria-label="last page">
+              <button className="page-link" aria-label="last page">
                 <span aria-hidden="true">
                   <FontAwesomeIcon icon={faAnglesRight} />
                 </span>
-              </a>
+              </button>
             </li>
           </>
         ) : (
@@ -87,16 +88,16 @@ function Pagination() {
               className="page-item"
               onClick={() => setCurrentPage((prev) => prev + 1)}
             >
-              <a className="page-link" href="#" aria-label="next page">
+              <button className="page-link" aria-label="next page">
                 <FontAwesomeIcon icon={faChevronRight} />
-              </a>
+              </button>
             </li>
             <li className="page-item" onClick={() => setCurrentPage(lastPage)}>
-              <a className="page-link" href="#" aria-label="last page">
+              <button className="page-link" aria-label="last page">
                 <span aria-hidden="true">
                   <FontAwesomeIcon icon={faAnglesRight} />
                 </span>
-              </a>
+              </button>
             </li>
           </>
         )}

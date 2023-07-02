@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { PaginationContext } from "../context/PaginationContext";
+import { useAdminContext } from "../hooks/useAdminContext";
 
 function SearchBar() {
-  const { searchText, setSearchText } = useContext(PaginationContext);
+  const { searchText, setSearchText } = useAdminContext();
 
   return (
     <input

@@ -1,8 +1,19 @@
-import { useContext } from "react";
-import { PaginationContext } from "../context/PaginationContext";
+import { useAdminContext } from "../hooks/useAdminContext";
 
 function DeleteSelectedButton() {
-  const { deleteSelectedRows } = useContext(PaginationContext);
+  const { selectedRows, users, setUsers, setErrorMessage } = useAdminContext();
+
+  const deleteSelectedRows = () => {
+    if (selectedRows.length > 0) {
+      const users_remaining = users.filter(
+        (user) => !selectedRows.includes(user.id)
+      );
+      setUsers(users_remaining);
+    } else {
+      console.log("No row selected");
+      setErrorMessage("No row is selected");
+    }
+  };
 
   return (
     <button

@@ -1,6 +1,7 @@
-function filterUsers(users, searchText) {
+function filterUsers(currentUsers, searchText) {
   const search = searchText.trim();
-  const filteredUsers = users.filter(
+
+  const filteredUsers = currentUsers.filter(
     (user) =>
       user.name.toLowerCase().includes(search) ||
       user.email.toLowerCase().includes(search) ||
